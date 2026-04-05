@@ -1,327 +1,852 @@
 <!DOCTYPE html>
-<html class="no-js" lang="en">
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>My Portfolio</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="theme-color" content="#0f172a" />
+    <title>Quelin Geeson | Portfolio</title>
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
     <link rel="icon" href="favicon.ico" type="image/x-icon" />
-    <link
-      href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="libs/font-awesome/css/font-awesome.min.css" />
-    <link href="css/bootstrap.min.css" rel="stylesheet" />
-    <link href="css/styles.css" rel="stylesheet" />
-    <!-- Google Tag Manager -->
-      <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-      })(window,document,'script','dataLayer','GTM-TVKPN2W8');</script>
-      <!-- End Google Tag Manager -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <style>
+      :root {
+        --bg: #07111f;
+        --bg-soft: #0b1627;
+        --surface: rgba(255, 255, 255, 0.06);
+        --surface-2: rgba(255, 255, 255, 0.09);
+        --border: rgba(255, 255, 255, 0.12);
+        --text: #e5eefb;
+        --muted: #9fb2cc;
+        --accent: #7c3aed;
+        --accent-2: #22c55e;
+        --shadow: 0 18px 50px rgba(0, 0, 0, 0.28);
+        --radius: 24px;
+        --max: 1120px;
+      }
+
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body {
+        margin: 0;
+        font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        background:
+          radial-gradient(circle at top left, rgba(124, 58, 237, 0.20), transparent 34%),
+          radial-gradient(circle at top right, rgba(34, 197, 94, 0.14), transparent 26%),
+          linear-gradient(180deg, #06101d 0%, #09111c 45%, #07111f 100%);
+        color: var(--text);
+        line-height: 1.7;
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+      }
+
+      a { color: inherit; text-decoration: none; }
+      img { max-width: 100%; display: block; }
+
+      .container {
+        width: min(100% - 32px, var(--max));
+        margin: 0 auto;
+      }
+
+      .section {
+        padding: 88px 0;
+      }
+
+      .section-title {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        margin-bottom: 30px;
+      }
+
+      .section-title h2 {
+        margin: 0;
+        font-size: clamp(1.65rem, 3vw, 2.4rem);
+        letter-spacing: -0.03em;
+      }
+
+      .section-title .line {
+        height: 1px;
+        flex: 1;
+        background: linear-gradient(90deg, rgba(255,255,255,0.25), transparent);
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 14px;
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        background: rgba(255,255,255,0.04);
+        color: var(--muted);
+        font-size: 0.88rem;
+        margin-bottom: 18px;
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        padding: 14px 22px;
+        border-radius: 999px;
+        border: 1px solid transparent;
+        font-weight: 600;
+        transition: 0.25s ease;
+        cursor: pointer;
+        white-space: nowrap;
+      }
+
+      .btn-primary {
+        background: linear-gradient(135deg, var(--accent), #4f46e5);
+        color: white;
+        box-shadow: 0 14px 30px rgba(124, 58, 237, 0.24);
+      }
+
+      .btn-primary:hover { transform: translateY(-1px); }
+      .btn-ghost {
+        border-color: var(--border);
+        background: rgba(255,255,255,0.04);
+        color: var(--text);
+      }
+
+      .btn-ghost:hover, .btn-primary:hover { filter: brightness(1.06); }
+
+      /* Header */
+      header {
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        backdrop-filter: blur(16px);
+        background: rgba(6, 12, 22, 0.72);
+        border-bottom: 1px solid rgba(255,255,255,0.08);
+      }
+
+      .nav-wrap {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        min-height: 76px;
+        gap: 16px;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-weight: 800;
+        letter-spacing: -0.03em;
+      }
+
+      .brand-mark {
+        width: 42px;
+        height: 42px;
+        border-radius: 14px;
+        display: grid;
+        place-items: center;
+        background: linear-gradient(135deg, var(--accent), #14b8a6);
+        color: white;
+        box-shadow: var(--shadow);
+      }
+
+      nav ul {
+        list-style: none;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin: 0;
+        padding: 0;
+      }
+
+      nav a {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10px 14px;
+        border-radius: 999px;
+        color: var(--muted);
+        transition: 0.2s ease;
+        font-weight: 500;
+      }
+
+      nav a:hover { background: rgba(255,255,255,0.06); color: var(--text); }
+
+      .menu-toggle {
+        display: none;
+        width: 46px;
+        height: 46px;
+        border: 1px solid var(--border);
+        background: rgba(255,255,255,0.05);
+        color: var(--text);
+        border-radius: 14px;
+        align-items: center;
+        justify-content: center;
+      }
+
+      /* Hero */
+      .hero {
+        padding: 72px 0 56px;
+      }
+
+      .hero-grid {
+        display: grid;
+        grid-template-columns: 1.3fr 0.9fr;
+        gap: 28px;
+        align-items: stretch;
+      }
+
+      .hero-card,
+      .info-card,
+      .content-card,
+      .skill-chip,
+      .timeline-item,
+      .edu-card {
+        border: 1px solid var(--border);
+        background: rgba(255,255,255,0.05);
+        box-shadow: var(--shadow);
+        border-radius: var(--radius);
+      }
+
+      .hero-card {
+        padding: 34px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero-card::after {
+        content: "";
+        position: absolute;
+        inset: auto -90px -90px auto;
+        width: 250px;
+        height: 250px;
+        background: radial-gradient(circle, rgba(124,58,237,0.22), transparent 68%);
+        pointer-events: none;
+      }
+
+      .hero h1 {
+        font-size: clamp(2.5rem, 6vw, 4.8rem);
+        line-height: 1.02;
+        letter-spacing: -0.05em;
+        margin: 0 0 14px;
+      }
+
+      .hero h2 {
+        margin: 0 0 18px;
+        font-size: clamp(1.1rem, 2.2vw, 1.45rem);
+        font-weight: 600;
+        color: #cdd8e6;
+      }
+
+      .hero p {
+        margin: 0 0 24px;
+        max-width: 68ch;
+        color: var(--muted);
+      }
+
+      .hero-actions {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+
+      .hero-metrics {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 12px;
+        margin-top: 28px;
+      }
+
+      .metric {
+        padding: 16px;
+        border-radius: 18px;
+        background: rgba(255,255,255,0.04);
+        border: 1px solid rgba(255,255,255,0.08);
+      }
+
+      .metric strong {
+        display: block;
+        font-size: 1.25rem;
+        margin-bottom: 4px;
+      }
+
+      .metric span { color: var(--muted); font-size: 0.92rem; }
+
+      .hero-side {
+        display: grid;
+        gap: 18px;
+      }
+
+      .info-card {
+        padding: 22px;
+      }
+
+      .info-card h3 {
+        margin: 0 0 12px;
+        font-size: 1.02rem;
+      }
+
+      .info-list {
+        display: grid;
+        gap: 12px;
+      }
+
+      .info-item {
+        display: flex;
+        gap: 12px;
+        align-items: flex-start;
+      }
+
+      .info-item i {
+        margin-top: 3px;
+        color: #c4b5fd;
+      }
+
+      .info-item span {
+        color: var(--muted);
+        font-size: 0.95rem;
+      }
+
+      /* About */
+      .content-card {
+        padding: 28px;
+      }
+
+      .content-card p {
+        margin: 0;
+        color: var(--muted);
+      }
+
+      .about-grid {
+        display: grid;
+        grid-template-columns: 0.75fr 1.25fr;
+        gap: 24px;
+      }
+
+      .highlight-box {
+        padding: 28px;
+        border-radius: var(--radius);
+        background: linear-gradient(180deg, rgba(124,58,237,0.18), rgba(255,255,255,0.04));
+        border: 1px solid rgba(255,255,255,0.10);
+      }
+
+      .highlight-box h3 {
+        margin: 0 0 10px;
+        font-size: 1.35rem;
+      }
+
+      .highlight-box p {
+        margin: 0;
+        color: var(--muted);
+      }
+
+      /* Timeline */
+      .timeline {
+        display: grid;
+        gap: 18px;
+      }
+
+      .timeline-item {
+        padding: 24px;
+        position: relative;
+      }
+
+      .timeline-top {
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
+        flex-wrap: wrap;
+        margin-bottom: 10px;
+      }
+
+      .timeline-item h3 {
+        margin: 0 0 4px;
+        font-size: 1.15rem;
+      }
+
+      .timeline-item h4 {
+        margin: 0;
+        color: #d8e3f1;
+        font-size: 0.98rem;
+        font-weight: 600;
+      }
+
+      .date-pill {
+        align-self: flex-start;
+        padding: 8px 12px;
+        border-radius: 999px;
+        background: rgba(34,197,94,0.12);
+        border: 1px solid rgba(34,197,94,0.20);
+        color: #b6f7cd;
+        font-size: 0.88rem;
+        white-space: nowrap;
+      }
+
+      .timeline-item p {
+        margin: 12px 0 0;
+        color: var(--muted);
+        white-space: pre-line;
+      }
+
+      /* Education */
+      .education-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 18px;
+      }
+
+      .edu-card {
+        padding: 24px;
+      }
+
+      .edu-card h3 {
+        margin: 0 0 8px;
+        font-size: 1.08rem;
+      }
+
+      .edu-card .education-date {
+        display: inline-block;
+        margin-bottom: 12px;
+        color: #c7d2e4;
+        font-weight: 600;
+      }
+
+      .edu-card h4 {
+        margin: 0;
+        color: var(--text);
+        font-size: 0.98rem;
+        font-weight: 500;
+      }
+
+      /* Skills */
+      .skills-wrap {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+
+      .skill-chip {
+        padding: 12px 16px;
+        border-radius: 999px;
+        background: rgba(255,255,255,0.05);
+        color: #e8eef9;
+        font-weight: 500;
+        box-shadow: none;
+      }
+
+      /* Contact */
+      .contact-box {
+        text-align: center;
+        padding: 36px 28px;
+      }
+
+      .contact-box p {
+        color: var(--muted);
+        max-width: 65ch;
+        margin: 10px auto 24px;
+      }
+
+      /* Footer */
+      footer {
+        padding: 28px 0 36px;
+        border-top: 1px solid rgba(255,255,255,0.08);
+        color: var(--muted);
+      }
+
+      .footer-grid {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 16px;
+        flex-wrap: wrap;
+      }
+
+      .social {
+        display: flex;
+        gap: 10px;
+      }
+
+      .social a {
+        width: 42px;
+        height: 42px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 14px;
+        border: 1px solid var(--border);
+        background: rgba(255,255,255,0.04);
+        transition: 0.2s ease;
+      }
+
+      .social a:hover {
+        transform: translateY(-1px);
+        background: rgba(255,255,255,0.08);
+        color: white;
+      }
+
+      /* Mobile */
+      @media (max-width: 900px) {
+        .hero-grid,
+        .about-grid,
+        .education-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .hero {
+          padding-top: 42px;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .menu-toggle { display: inline-flex; }
+
+        nav {
+          position: fixed;
+          top: 76px;
+          right: 16px;
+          left: 16px;
+          padding: 14px;
+          border-radius: 22px;
+          border: 1px solid var(--border);
+          background: rgba(7, 17, 31, 0.98);
+          box-shadow: var(--shadow);
+          transform: translateY(-12px);
+          opacity: 0;
+          pointer-events: none;
+          transition: 0.22s ease;
+        }
+
+        nav.open {
+          transform: translateY(0);
+          opacity: 1;
+          pointer-events: auto;
+        }
+
+        nav ul {
+          flex-direction: column;
+          align-items: stretch;
+        }
+
+        nav a {
+          width: 100%;
+          justify-content: flex-start;
+          padding: 13px 14px;
+        }
+
+        .hero-card,
+        .content-card,
+        .highlight-box,
+        .timeline-item,
+        .edu-card,
+        .info-card,
+        .contact-box {
+          padding: 22px;
+        }
+
+        .hero-metrics {
+          grid-template-columns: 1fr;
+        }
+
+        .section {
+          padding: 64px 0;
+        }
+      }
+    </style>
   </head>
-
   <body>
-    <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TVKPN2W8"
-    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <!-- End Google Tag Manager (noscript) -->
-    <div id="mobile-menu-open" class="shadow-large">
-      <i class="fa fa-bars" aria-hidden="true"></i>
-    </div>
-    <!-- End #mobile-menu-toggle -->
     <header>
-      <div id="mobile-menu-close">
-        <span>Close</span> <i class="fa fa-times" aria-hidden="true"></i>
+      <div class="container nav-wrap">
+        <a class="brand" href="#home" aria-label="Go to top">
+          <span class="brand-mark">QG</span>
+          <span>Quelin Geeson</span>
+        </a>
+
+        <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="siteNav">
+          <i class="fa fa-bars" aria-hidden="true"></i>
+        </button>
+
+        <nav id="siteNav" aria-label="Primary navigation">
+          <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#education">Education</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </nav>
       </div>
-      <ul id="menu" class="shadow">
-        <li>
-          <a href="#about">About</a>
-        </li>
-        <li>
-          <a href="#experience">Experience</a>
-        </li>
-        <li>
-          <a href="#education">Education</a>
-        </li>
-        
-        <li>
-          <a href="#skills">Skills</a>
-        </li>
-        <li>
-          <a href="#contact">Contact</a>
-        </li>
-      </ul>
     </header>
-    <!-- End header -->
 
-    <div id="lead">
-      <div id="lead-content">
-        <h1>Quelin Geeson</h1>
-        <h2>Tagging Engineer & Web Analyst</h2>
-        <a href="https://drive.google.com/file/d/1UsTfYPf1gB_vHOEmw6BYycVxt9SDVPBd/view?usp=sharing" class="btn-rounded-white">Download Resume</a>
-      </div>
-      <!-- End #lead-content -->
-
-      <div id="lead-overlay"></div>
-
-      <div id="lead-down">
-        <span>
-          <i class="fa fa-chevron-down" aria-hidden="true"></i>
-        </span>
-      </div>
-      <!-- End #lead-down -->
-    </div>
-    <!-- End #lead -->
-
-    <div id="about">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-4">
-            <h2 class="heading">About Me</h2>
-          </div>
-          <div class="col-md-8">
+    <main id="home">
+      <section class="hero">
+        <div class="container hero-grid">
+          <div class="hero-card">
+            <div class="eyebrow"><i class="fa fa-sparkles" aria-hidden="true"></i> Tagging Engineer • Web Analyst • Data Specialist</div>
+            <h1>Quelin Geeson</h1>
+            <h2>Building reliable analytics foundations for digital experiences.</h2>
             <p>
-            Web Analytics professional with hands-on experience in implementing and managing Web Analytics on tools like Adobe Analytics, GA4, and Tealium iQ. I specialize in media tagging (Meta, Google, LinkedIn, Twitter, Floodlight, etc.), user journey tracking using AppMeasurement and JavaScript, and managing Consent Management solutions.
-
-In my current role at Thomson Reuters, I work on Segment, Google Analytics 4 (GA4), Customer Data Platforms (CDPs), and data lakes such as Snowflake, helping build a scalable data foundation that powers advanced analytics and customer insights across digital channels.
-
-In my previous role at AstraZeneca, I supported global teams with end-to-end web analytics setup, including AudienceStream CDP, data layers, and admin configurations. Skilled in translating OKRs into actionable insights using Adobe Analytics Workspace and presenting key findings to stakeholders.
-
-Core skills include: Adobe Analytics, Tealium iQ, Segment, GA4, CDP, Media Tagging, Consent Management, JavaScript, jQuery, SQL, Power BI, and Snowflake.
-
-Previously, I also worked as a Project Coordinator at Megavent Technologies Pvt Ltd, managing automation projects focused on retractable roof systems. I hold a Bachelor of Engineering in Mechanical Engineering from Visvesvaraya Technological University, graduating with distinction.
-
-I’m passionate about Web Analytics, Digital Marketing, Data Analytics, Machine Learning, AI, and Automation — always open to connecting and discussing new ideas or opportunities in this space (or even over a coffee ☕).
+              Web Analytics professional with hands-on experience in Adobe Analytics, GA4, Tealium iQ, Segment CDP, consent management, and media tagging. I focus on clean implementation, scalable event design, and actionable insights across web and app ecosystems.
             </p>
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="https://drive.google.com/file/d/1UsTfYPf1gB_vHOEmw6BYycVxt9SDVPBd/view?usp=sharing" target="_blank" rel="noopener noreferrer">
+                <i class="fa fa-download" aria-hidden="true"></i> Download Resume
+              </a>
+              <a class="btn btn-ghost" href="#contact">
+                <i class="fa fa-envelope" aria-hidden="true"></i> Get in Touch
+              </a>
+            </div>
+
+            <div class="hero-metrics">
+              <div class="metric">
+                <strong>5+ Years</strong>
+                <span>Analytics & tagging experience</span>
+              </div>
+              <div class="metric">
+                <strong>Multi-Stack</strong>
+                <span>Adobe, GA4, Segment, Tealium</span>
+              </div>
+              <div class="metric">
+                <strong>Global</strong>
+                <span>Europe, Canada, Spain, Italy</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="hero-side">
+            <div class="info-card">
+              <h3>Core Focus</h3>
+              <div class="info-list">
+                <div class="info-item"><i class="fa fa-check-circle" aria-hidden="true"></i><span>Event tracking and data layer design</span></div>
+                <div class="info-item"><i class="fa fa-check-circle" aria-hidden="true"></i><span>Media tagging and campaign measurement</span></div>
+                <div class="info-item"><i class="fa fa-check-circle" aria-hidden="true"></i><span>Consent management and implementation QA</span></div>
+                <div class="info-item"><i class="fa fa-check-circle" aria-hidden="true"></i><span>Dashboarding, SQL, and stakeholder reporting</span></div>
+              </div>
+            </div>
+
+            <div class="info-card">
+              <h3>Current Stack</h3>
+              <div class="skills-wrap">
+                <span class="skill-chip">Adobe Analytics</span>
+                <span class="skill-chip">GA4</span>
+                <span class="skill-chip">Segment</span>
+                <span class="skill-chip">Snowflake</span>
+                <span class="skill-chip">Looker Studio</span>
+                <span class="skill-chip">Tealium iQ</span>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
-    <!-- End #about -->
+      </section>
 
-    <div id="experience" class="background-alt">
-      <h2 class="heading">Experience</h2>
-      <div id="experience-timeline">
-
-                        <div data-date=" DSep 2025 - Present">
-          <h3>Thomson Reutes</h3>
-          <h4>Senior Data Specialist- Audiance Analytics</h4>
-          <p>
-          
-         -Configured GA4 instrumentation for Reuters digital properties using Google Analytics and Segment CDP, enabling structured event tracking, audience enrichment, and subscription funnel measurement.
--Designed and maintained event schemas, payload structures, and taxonomy standards supporting ingestion across analytics, CDP, and activation workflows.
--Integrated Segment CDP with downstream destinations including Sailthru (email campaigns), Braze (push for Reuters app), dynamic subscription paywall, and internal subscription tracking systems.
--Built analytical dashboards in Looker Studio, Tableau, and GA4 Explorations using Snowflake datasets to support self-serve analytics, cohorting, and KPI monitoring.
--Queried and modeled datasets in Snowflake to enable user-level segmentation, subscription analytics, and multi-touch engagement insights.
--Performed mobile and web analytics QA, validating Reuters app instrumentation using Proxyman for event payload inspection, parameter validation, and release testing.
--Created and managed implementation tickets in Azure DevOps (ADO), partnering with site developers for event configuration, debugging, and deployment validation.
--Executed end-to-end data quality checks across GA4, Segment CDP pipelines, Snowflake, and downstream destinations to ensure consistency, compliance, and activation accuracy. -Support the Spain and Italy teams as the Tagging and Web Analytics SME. 
-          -Work on event tracking projects and handle the end-to-end implementation of tags like Adobe Analytics, Floodlight, Facebook (Meta), Twitter, LinkedIn, Flashtalking, etc.
-          -Guide the team as the Consent Management SME for all the associated markets. Worked closely with consent management vendors to roll out the project on all Global websites.
-          </p>
+      <section id="about" class="section">
+        <div class="container">
+          <div class="section-title">
+            <h2>About Me</h2>
+            <div class="line"></div>
+          </div>
+          <div class="about-grid">
+            <div class="highlight-box">
+              <h3>Analytics-first, detail-driven, and collaborative.</h3>
+              <p>
+                I work at the intersection of web analytics, data engineering, and digital marketing. My strength is translating business goals into reliable measurement frameworks, then turning the data into something teams can actually use.
+              </p>
+            </div>
+            <div class="content-card">
+              <p>
+                I am a Web Analytics professional with hands-on experience implementing and managing analytics on Adobe Analytics, GA4, and Tealium iQ. I specialize in media tagging (Meta, Google, LinkedIn, Twitter, Floodlight, and more), user journey tracking using AppMeasurement and JavaScript, and managing consent solutions.
+                <br /><br />
+                In my current role at Thomson Reuters, I work with Segment, GA4, CDPs, and Snowflake to help build a scalable data foundation for analytics and customer insights across digital channels.
+                <br /><br />
+                My previous experience at AstraZeneca involved global web analytics setup, AudienceStream CDP, data layers, and admin configurations. I also hold a Bachelor of Engineering in Mechanical Engineering from VTU and have a strong interest in automation, AI, and digital analytics.
+              </p>
+            </div>
+          </div>
         </div>
+      </section>
 
-                <div data-date=" Dec 2024-Sep 2025">
-          <h3>Astrazeneca India Pvt Ltd.</h3>
-          <h4>Analyst- Tagging & Web Analytics</h4>
-          <p>
-          
-          -Support the Spain and Italy teams as the Tagging and Web Analytics SME. 
-          -Work on event tracking projects and handle the end-to-end implementation of tags like Adobe Analytics, Floodlight, Facebook (Meta), Twitter, LinkedIn, Flashtalking, etc.
-          -Guide the team as the Consent Management SME for all the associated markets. Worked closely with consent management vendors to roll out the project on all Global websites.
-          </p>
+      <section id="experience" class="section">
+        <div class="container">
+          <div class="section-title">
+            <h2>Experience</h2>
+            <div class="line"></div>
+          </div>
+          <div class="timeline">
+            <article class="timeline-item">
+              <div class="timeline-top">
+                <div>
+                  <h3>Thomson Reuters</h3>
+                  <h4>Senior Data Specialist — Audience Analytics</h4>
+                </div>
+                <span class="date-pill">Sep 2025 – Present</span>
+              </div>
+              <p>- Configured GA4 instrumentation for Reuters digital properties using Google Analytics and Segment CDP, enabling structured event tracking, audience enrichment, and subscription funnel measurement.
+- Designed and maintained event schemas, payload structures, and taxonomy standards supporting ingestion across analytics, CDP, and activation workflows.
+- Integrated Segment CDP with downstream destinations including Sailthru, Braze, subscription systems, and internal tracking tools.
+- Built dashboards in Looker Studio, Tableau, and GA4 Explorations using Snowflake datasets.
+- Performed mobile and web analytics QA using Proxyman and release testing.
+- Supported Spain and Italy teams as tagging and web analytics SME.</p>
+            </article>
+
+            <article class="timeline-item">
+              <div class="timeline-top">
+                <div>
+                  <h3>AstraZeneca India Pvt Ltd.</h3>
+                  <h4>Analyst — Tagging & Web Analytics</h4>
+                </div>
+                <span class="date-pill">Dec 2024 – Sep 2025</span>
+              </div>
+              <p>- Supported Spain and Italy teams as a tagging and web analytics SME.
+- Worked on event tracking projects and end-to-end implementation of tags like Adobe Analytics, Floodlight, Meta, Twitter, LinkedIn, and Flashtalking.
+- Guided the team as the consent management SME for associated markets.</p>
+            </article>
+
+            <article class="timeline-item">
+              <div class="timeline-top">
+                <div>
+                  <h3>AstraZeneca India Pvt Ltd.</h3>
+                  <h4>Associate — Tagging & Web Analytics</h4>
+                </div>
+                <span class="date-pill">Oct 2023 – Nov 2024</span>
+              </div>
+              <p>- Worked on ad hoc projects and implemented Adobe Analytics and media tagging as per campaign requirements.
+- Presented insights from Adobe Analytics Workspace reports to brand teams.
+- Worked on consent management and POC projects.</p>
+            </article>
+
+            <article class="timeline-item">
+              <div class="timeline-top">
+                <div>
+                  <h3>AstraZeneca India Pvt Ltd.</h3>
+                  <h4>Junior Associate / Graduate Trainee — Tagging & Web Analytics</h4>
+                </div>
+                <span class="date-pill">May 2021 – Sep 2023</span>
+              </div>
+              <p>- Supported Europe and Canada markets with end-to-end web analytics implementation using Tealium and Adobe Analytics.
+- Handled KPI discovery meetings, solution design documents, and troubleshooting tickets in JIRA.
+- Implemented custom media tagging requests using Tealium iQ.</p>
+            </article>
+
+            <article class="timeline-item">
+              <div class="timeline-top">
+                <div>
+                  <h3>Megavent Technologies Pvt Ltd.</h3>
+                  <h4>Lead Project Coordinator</h4>
+                </div>
+                <span class="date-pill">Jul 2018 – Oct 2019</span>
+              </div>
+              <p>- Team handling and project coordination.
+- Product and fixtures designing.
+- Client management and ISO documentation.</p>
+            </article>
+          </div>
         </div>
+      </section>
 
-
-
-        
-        <div data-date="Oct 2023-Nov 2024">
-          <h3>Astrazeneca India Pvt Ltd.</h3>
-          <h4>Associate-Tagging & Web Analytics</h4>
-          <p>
-          -Work on Ad hoc projects and help with implementing Adobe
-          Analytics as well as Media Tagging like Meta, Floodlight, and
-          Tealium AS as per the campaign requirements.
-          -Present the key insights generated in Adobe Analytics
-          workspace reports to the brand team.
-          -Work on Consent management as well as new POC projects.
-
-          </p>
+      <section id="education" class="section">
+        <div class="container">
+          <div class="section-title">
+            <h2>Education</h2>
+            <div class="line"></div>
+          </div>
+          <div class="education-grid">
+            <div class="edu-card">
+              <h3>The Centre for Development of Advanced Computing (CDAC)</h3>
+              <span class="education-date">2020 – 2021</span>
+              <h4>Post Graduate Diploma in Advanced Computing</h4>
+            </div>
+            <div class="edu-card">
+              <h3>Visvesvaraya Technological University (VTU)</h3>
+              <span class="education-date">2014 – 2018</span>
+              <h4>Bachelor of Engineering in Mechanical Engineering</h4>
+            </div>
+            <div class="edu-card">
+              <h3>Kendriya Vidyalaya</h3>
+              <span class="education-date">2014</span>
+              <h4>12th standard — Physics, Chemistry, Mathematics, and Computer Science</h4>
+            </div>
+            <div class="edu-card">
+              <h3>Kendriya Vidyalaya</h3>
+              <span class="education-date">2012</span>
+              <h4>10th standard</h4>
+            </div>
+          </div>
         </div>
+      </section>
 
-        <div data-date="June 2022-September 2023">
-          <h3>Astrazeneca India Pvt Ltd.</h3>
-          <h4>Junior Associate-Tagging & Web Analytics</h4>
-          <p>
-          
-          -Supporting Europe and Canada Markets with end-to-end web
-          analytics implementation using Tealium and Adobe Analytics.
-          -Handling meetings with the brand to understand the KPIs and
-          Tagging requirements. 
-          -Creating the Solution Design Documents and working on
-          troubleshooting and Tagging tickets issued in JIRA.
-          -Handling custom media tagging requests such as Audience
-          Stream, Facebook pixel, Twitter Pixel, Flashtalking, Floodlight, Google Adwords, etc using Tealium IQ Tag
-          Management System. 
-          </p>
+      <section id="skills" class="section">
+        <div class="container">
+          <div class="section-title">
+            <h2>Skills</h2>
+            <div class="line"></div>
+          </div>
+          <div class="skills-wrap">
+            <span class="skill-chip">Web Analytics</span>
+            <span class="skill-chip">Adobe Analytics</span>
+            <span class="skill-chip">Google Tag Manager</span>
+            <span class="skill-chip">Google Analytics</span>
+            <span class="skill-chip">Tealium</span>
+            <span class="skill-chip">HTML</span>
+            <span class="skill-chip">JavaScript</span>
+            <span class="skill-chip">Python</span>
+            <span class="skill-chip">jQuery</span>
+            <span class="skill-chip">SQL</span>
+            <span class="skill-chip">JIRA</span>
+            <span class="skill-chip">MS Office</span>
+          </div>
         </div>
+      </section>
 
-        <div data-date="May 2021-May 2022">
-          <h3>Astrazeneca India Pvt Ltd.</h3>
-          <h4>Graduate Trainee- Tagging & Web Analytics</h4>
-          <p>
-          
-          -Supporting Europe and Canada Markets with end-to-end web
-          analytics implementation using Tealium and Adobe Analytics.
-          -Handling meetings with the brand to understand the KPIs and
-          Tagging requirements. 
-          -Creating the Solution Design Documents and working on
-          troubleshooting and Tagging tickets issued in JIRA.
-          -Handling custom media tagging requests such as Audience
-          Stream, Facebook pixel, Twitter Pixel, Flashtalking, Floodlight, Google Adwords, etc using Tealium IQ Tag
-          Management System. 
-          </p>
+      <section id="contact" class="section">
+        <div class="container">
+          <div class="content-card contact-box">
+            <div class="eyebrow"><i class="fa fa-comments" aria-hidden="true"></i> Contact</div>
+            <h2 class="section-heading" style="margin: 0; font-size: clamp(1.7rem, 3vw, 2.4rem); letter-spacing: -0.03em;">Get in Touch</h2>
+            <p>
+              I am always open to meaningful conversations around web analytics, tagging, digital marketing measurement, data strategy, and opportunities to build better digital experiences.
+            </p>
+            <a class="btn btn-primary" href="https://www.linkedin.com/in/quelin/" target="_blank" rel="noopener noreferrer">
+              <i class="fa fa-linkedin" aria-hidden="true"></i> Reach out on LinkedIn
+            </a>
+          </div>
         </div>
-
-        
-        <div data-date="July 2018-October 2019">
-          <h3>Megavent Technologies Pvt Ltd..</h3>
-          <h4>Lead Project Coordinator</h4>
-          <p>
-          
-          -Team Handling and Project Coordination. 
-          -Product and fixtures designing. 
-          -Client Management and handling ISO Documentation.    
-          </p>
-        </div>
-
-        
-        </div>
-      </div>
-    </div>
-    <!-- End #experience -->
-
-    <div id="education">
-      <h2 class="heading">Education</h2>
-      <div class="education-block">
-        
-        <h3>The Centre for Development of Advanced Computing (CDAC)</h3>
-        <span class="education-date">2020-2021</span>
-        <h4>Post Graduate Diploma in Advanced Computing</h4>
-        
-        <p></p>
-      </div>
-       <div class="education-block"> 
-        <h3>Visvesvaraya Technological University (VTU)</h3>
-        <span class="education-date">2014-2018</span>
-        <h4>Bachelor of Engineer in Mechanical Engineering</h4>
-        
-        <p></p>
-      </div>
-      <!-- End .education-block -->
-
-      <div class="education-block">
-        <h3>Kendriya Vidyalaya</h3>
-        <span class="education-date">2014</span>
-        <h4>
-          12th standard with Physics, Chemistry, Mathematics and Computer
-          Science
-        </h4>
-        
-      </div>
-
-      <div class="education-block">
-        <h3>Kendriya Vidyalaya</h3>
-        <span class="education-date">2012</span>
-        <h4>10th standard</h4>
-        
-      </div>
-
-      <!-- End .education-block -->
-    </div>
-    <!-- End #education -->
-
-
-
-    <div id="skills">
-      <h2 class="heading">Skills</h2>
-      <ul>
-        <li>Web Analytics</li>
-
-        <li>Adobe Analytics</li>
-
-        <li>Google Tag Manager</li>
-
-        <li>Google Analytics</li>
-
-        <li>Tealium</li>
-
-        <li>HTML</li>
-        <li>JavaScript</li>
-        <li>Python</li>
-
-        <li>jQuerry</li>
-        <li>SQL</li>
-        <li>JIRA</li>
-        <li>MS Office</li>
-        
-      </ul>
-    </div>
-    <!-- End #skills -->
-
-    <div id="contact">
-      <h2>Get in Touch</h2>
-      <div id="contact-form">
-          <a href="https://www.linkedin.com/in/quelin/" class="btn-rounded-white">Reach out to me on LinkedIn</a>
-      </div>
-      <!-- End #contact-form -->
-    </div>
-    <!-- End #contact -->
+      </section>
+    </main>
 
     <footer>
-      <div class="container">
-        <div class="row">
-          <div class="col-sm-5 copyright">
-            <p>
-              Copyright &copy; 2020 Quelin Geeson
-            </p>
-          </div>
-          <div class="col-sm-2 top">
-            <span id="to-top">
-              <i class="fa fa-chevron-up" aria-hidden="true"></i>
-            </span>
-          </div>
-          <div class="col-sm-5 social">
-            <ul>
-              <li>
-                <a href="https://github.com/quelingeeson" target="_blank"
-                  ><i class="fa fa-github" aria-hidden="true"></i
-                ></a>
-              </li>
-              <li>
-                <a href="https://stackoverflow.com/users/15004033/quelin" target="_blank"
-                  ><i class="fa fa-stack-overflow" aria-hidden="true"></i
-                ></a>
-              </li>
-              <li>
-                <a href="https://www.linkedin.com/in/quelin/" target="_blank"
-                  ><i class="fa fa-linkedin" aria-hidden="true"></i
-                ></a>
-              </li>
-              
-              
-
-            </ul>
-          </div>
+      <div class="container footer-grid">
+        <div>Copyright © 2026 Quelin Geeson</div>
+        <div class="social" aria-label="Social links">
+          <a href="https://github.com/quelingeeson" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fa fa-github" aria-hidden="true"></i></a>
+          <a href="https://stackoverflow.com/users/15004033/quelin" target="_blank" rel="noopener noreferrer" aria-label="Stack Overflow"><i class="fa fa-stack-overflow" aria-hidden="true"></i></a>
+          <a href="https://www.linkedin.com/in/quelin/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
         </div>
       </div>
     </footer>
-    <!-- End footer -->
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="js/scripts.min.js"></script>
+    <script>
+      const menuToggle = document.getElementById('menuToggle');
+      const siteNav = document.getElementById('siteNav');
+
+      menuToggle.addEventListener('click', () => {
+        const isOpen = siteNav.classList.toggle('open');
+        menuToggle.setAttribute('aria-expanded', String(isOpen));
+        menuToggle.innerHTML = isOpen
+          ? '<i class="fa fa-times" aria-hidden="true"></i>'
+          : '<i class="fa fa-bars" aria-hidden="true"></i>';
+      });
+
+      document.querySelectorAll('#siteNav a').forEach((link) => {
+        link.addEventListener('click', () => {
+          if (window.innerWidth <= 768) {
+            siteNav.classList.remove('open');
+            menuToggle.setAttribute('aria-expanded', 'false');
+            menuToggle.innerHTML = '<i class="fa fa-bars" aria-hidden="true"></i>';
+          }
+        });
+      });
+    </script>
   </body>
 </html>
